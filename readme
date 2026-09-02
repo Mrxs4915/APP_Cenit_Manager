@@ -1,0 +1,243 @@
+# Plataforma Modular de Gestión Profesional
+
+## Descripción
+
+Aplicación web modular desarrollada con React, basada en una arquitectura de núcleo central (Core) y módulos independientes que pueden activarse dinámicamente desde un menú lateral.
+
+## Objetivos
+
+- Escalabilidad mediante módulos desacoplados.
+- Activación dinámica de funcionalidades.
+- Mantenimiento simplificado.
+- Persistencia independiente por módulo.
+- Posibilidad de incorporar nuevos módulos sin modificar el Core.
+
+---
+
+## Arquitectura General
+
+```text
+┌─────────────────┐
+│      Core       │
+├─────────────────┤
+│ Sidebar         │
+│ Router          │
+│ ModuleLoader    │
+│ Auth            │
+└────────┬────────┘
+         │
+ ┌───────┼────────┬───────────┐
+ │       │        │           │
+ ▼       ▼        ▼           ▼
+
+Proyectos  Empresa  Ingresos  Futuros
+Propios              Módulos
+```
+
+---
+
+## Stack Tecnológico
+
+### Frontend
+
+- React
+- Vite
+- React Router
+- Zustand o Context API
+- Tailwind CSS o Material UI
+
+### Backend
+
+- Node.js
+- Express
+- PostgreSQL
+- Prisma ORM
+
+---
+
+## Estructura del Proyecto
+
+```text
+src/
+│
+├── components/
+│   ├── Sidebar.jsx
+│   └── ModuleLoader.jsx
+│
+├── modules/
+│   ├── proyectosPropios/
+│   ├── proyectosEmpresa/
+│   └── ingresos/
+│
+├── services/
+├── hooks/
+├── context/
+├── configModules.js
+└── App.jsx
+```
+
+---
+
+## Módulos Iniciales
+
+### Proyectos Propios
+
+#### Funcionalidades
+
+- Gestión de proyectos
+- Registro de gastos
+- Registro de ingresos
+- Control de pagos pendientes
+- Generación de cotizaciones
+- Dashboard financiero
+
+#### Entidades
+
+- Proyecto
+- Cliente
+- Cotización
+- Gasto
+- Ingreso
+
+---
+
+### Proyectos Empresa
+
+#### Funcionalidades
+
+- Registro de proyectos asignados
+- Control de horas trabajadas
+- Registro de viáticos
+- Registro de kilometraje
+- Seguimiento de estados
+
+#### Entidades
+
+- Proyecto Empresa
+- Horas
+- Viático
+- Kilometraje
+
+---
+
+### Ingresos
+
+#### Funcionalidades
+
+- Conteo de informes realizados
+- Conteo de láminas realizadas
+- Registro de ingresos
+- Estadísticas mensuales
+
+#### Entidades
+
+- Informe
+- Lámina
+- Ingreso
+
+---
+
+## Configuración Dinámica de Módulos
+
+Todos los módulos serán registrados desde un archivo central:
+
+```javascript
+// configModules.js
+
+export const modules = [
+  {
+    id: "proyectos-propios",
+    name: "Proyectos Propios",
+    enabled: true,
+  },
+  {
+    id: "proyectos-empresa",
+    name: "Proyectos Empresa",
+    enabled: true,
+  },
+  {
+    id: "ingresos",
+    name: "Ingresos",
+    enabled: true,
+  }
+];
+```
+
+Esto permitirá habilitar o deshabilitar funcionalidades sin modificar el Core.
+
+---
+
+## Flujo General
+
+1. El usuario accede al Dashboard.
+2. El Sidebar carga los módulos disponibles.
+3. El usuario selecciona un módulo.
+4. El ModuleLoader carga dinámicamente el módulo correspondiente.
+5. Cada módulo administra su propia lógica y datos.
+
+---
+
+## Roadmap
+
+### Fase 1
+
+- Core de la aplicación
+- Sidebar dinámico
+- ModuleLoader
+- Diseño responsive
+
+### Fase 2
+
+- Persistencia de datos
+- Autenticación
+- Gestión de usuarios
+
+### Fase 3
+
+- Desarrollo de Proyectos Propios
+- Sistema de cotizaciones
+- Módulo financiero
+
+### Fase 4
+
+- Desarrollo de Proyectos Empresa
+- Gestión de viáticos
+- Gestión de horas
+- Gestión de kilometraje
+
+### Fase 5
+
+- Desarrollo del módulo Ingresos
+- Reportes
+- Métricas y estadísticas
+
+---
+
+## Escalabilidad
+
+Para agregar un nuevo módulo:
+
+1. Crear una carpeta dentro de `src/modules`.
+2. Registrar el módulo en `configModules.js`.
+3. Agregar la carga dinámica en `ModuleLoader.jsx`.
+4. Implementar la lógica específica del módulo.
+
+La arquitectura está diseñada para permitir crecimiento continuo sin afectar módulos existentes.
+
+---
+
+## Estado del Proyecto
+
+🚧 En desarrollo inicial
+
+Actualmente se encuentra en la fase de implementación del núcleo de la aplicación y definición de módulos principales.
+
+---
+
+## Próximos Pasos
+
+- Configurar entorno con React + Vite.
+- Implementar Sidebar dinámico.
+- Implementar ModuleLoader.
+- Crear Dashboard inicial.
+- Desplegar primera versión de prueba en Vercel.
